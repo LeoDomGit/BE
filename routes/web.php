@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PhongTroController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +19,4 @@ use App\Http\Controllers\RoleController;
 //     return view('welcome');
 // });
 Route::get('/roles', [RoleController::class,'index']);
+Route::get('/quan', [PhongTroController::class,'index']);
