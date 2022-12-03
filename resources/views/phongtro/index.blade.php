@@ -74,6 +74,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Hình Ảnh</th>
                     <th scope="col">Tên Phòng Trọ</th>
+                    <th scope="col">Quận Huyện</th>
                     <th scope="col">Diện tích</th>
                     <th scope="col">Ngày Tạo</th>
                     <th scope="col"></th>
@@ -87,6 +88,7 @@
                         <th scope="row"><?=$i++?></th>
                         <td><img style="width:150px" src="http://127.0.0.1:3000/images/{{$item['image']}}" alt=""></td>
                         <td>{{$item['roomname']}}</td>
+                        <td>{{$item['districtname']}}</td>
                         <td>{{$item['dientich']}} m2</td>
                         <td>{{$item['created_at']}}</td>
                         <td><button class="btn-sm btnxoaRoom btn btn-danger"data-id="{{$item["idRoome"]}}"> Xóa</button></td>
