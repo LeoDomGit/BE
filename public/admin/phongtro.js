@@ -37,6 +37,8 @@ function delete1(){
                           Toast.fire({
                             icon: 'success',
                             title: 'Xóa thành công'
+                          }).then(()=>{
+                            window.location.reload();
                           })
                     }else if(response.check==false){
                         if(response.message.id){
