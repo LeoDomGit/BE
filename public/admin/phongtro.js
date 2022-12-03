@@ -5,7 +5,7 @@ $(document).ready(function () {
 function delete1(){
     $(".btnxoaRoom").click(function (e) { 
         e.preventDefault();
-        
+        var idRoom= $(this).attr('data-id');
     });
 }
 function add(){
