@@ -29,6 +29,7 @@
               <th scope="col">#</th>
               <th scope="col">Tên Quận</th>
               <th scope="col">Ngày tạo</th>
+              <th scope="col">Tùy chọn</th>
               {{-- <th scope="col"></th> --}}
             </tr>
           </thead>
@@ -37,11 +38,11 @@
               @foreach ($allQuan as $item)
               <tr>
                   <th scope="row"><?=$i++?></th>
-                  <td>{{$item['districtname']}}</td>
-                  <td>{{$item['created_at']}}</td>
+                  <td><div class="quanName" data-id="{{$item["id"]}}">{{$item['districtname']}}</div></td>
+                  <td>{{$item['updated_at']}}</td>
+                  <td><button class="btn-sm btnxoaQuan btn btn-danger"  data-id="{{$item["id"]}}"> Xóa</button></td>
                 </tr>
               @endforeach
-            
           </tbody>
         </table>
         

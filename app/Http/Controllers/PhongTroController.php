@@ -22,9 +22,10 @@ class PhongTroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function index2()
     {
-        //
+        $allQuan= json_decode(HTTP::GET('http://127.0.0.1:3000/api/allQuan'),true);
+        return view('phongtro.index',compact('allQuan'));
     }
 
     /**

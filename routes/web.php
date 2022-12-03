@@ -20,3 +20,4 @@ use App\Http\Controllers\PhongTroController;
 // });
 Route::get('/roles', [RoleController::class,'index']);
 Route::get('/quan', [PhongTroController::class,'index']);
+Route::get('/phongtro', [PhongTroController::class,'index2']);
