@@ -91,7 +91,10 @@
                         <td>{{$item['districtname']}}</td>
                         <td>{{$item['dientich']}} m2</td>
                         <td>{{$item['created_at']}}</td>
-                        <td><button class="btn-sm btnxoaRoom btn btn-danger"data-id="{{$item["idRoome"]}}"> Xóa</button></td>
+                        <td>
+                            <button class="btn-sm btnxoaRoom btn btn-danger"data-id="{{$item["idRoome"]}}"> Xóa</button>
+                            <button class="btn-sm btnsuaRoom btn btn-warning"data-id="{{$item["idRoome"]}}"> Sửa</button>
+                        </td>
                       </tr>
                     @endforeach
                 </tbody>
