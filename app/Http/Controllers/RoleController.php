@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class RoleController extends Controller
 {
     /**
@@ -13,7 +13,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('roles.index');
+        $LoaiTK = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allLTK'),true);
+        $allUser = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allUser'),true);
+        return view('roles.index',compact('LoaiTK','allUser'));
     }
 
     /**

@@ -3,7 +3,8 @@
 @section('main')
     <div class="mt-2">
         <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Thêm Loại Tài Khoản</button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -21,19 +22,71 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+        </div>
 
-          
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="dangntk" aria-describedby="emailHelp" placeholder="Email">
+        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">Thêm tài khoản</button>
+
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal2Label">Thêm Tài Khoản</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="username" placeholder="Tên người dùng" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control mt-2" id="useremail" placeholder="Email người dùng" aria-label="Username" aria-describedby="basic-addon1">
+                    
+                    <select name="" class="form-control mt-2" id="selectLTK">
+                        <option value="0">Chọn loại tài khoản</option>
+                        @foreach ($LoaiTK as $item)
+                            <option value="{{$item['id']}}">{{$item['name']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                  <button type="button" class="btn btn-primary" id="addUserSubmit">Thêm</button>
+                </div>
+              </div>
+            </div>
       </div>
-      <button type="submit" class="btn btn-primary" id="bntsubmitd">Submit</button>
-    </form>
+      <div class="mt-2">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên tài khoản</th>
+                <th scope="col">Email</th>
+                <th scope="col">Tình trạng</th>
+                <th scope="col">Ngày tạo</th>
+              </tr>
+            </thead>
+            <tbody>
+                <?php $i=1;?>
+                @foreach ($allUser as $item)
+                <tr>
+                    <th scope="row"><?=$i++?></th>
+                    <td>{{$item['username']}}</td>
+                    <td>{{$item['useremail']}}</td>
+                    <td>@if ($item['status']==1)
+                        <b>Đang hoạt động</b>
+                    @else
+                    <b>Đang khóa</b>
+                        
+                    @endif</td>
+                    <td>{{$item['created_at']}}</td>
+                  </tr>
+                @endforeach
+              
+            </tbody>
+          </table>
+          
+      </div>
+    </div>
+
     
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="admin/themloaitaikhoan.js"></script>
-    <script src="admin/dangn.js"></script>
+    <script src="admin/users.js"></script>
 @endsection
