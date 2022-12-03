@@ -1,6 +1,13 @@
 $(document).ready(function () {
-    add()
+    add();
+    delete1();
 });
+function delete1(){
+    $(".btnxoaRoom").click(function (e) { 
+        e.preventDefault();
+        
+    });
+}
 function add(){
     $("#submitPhongTroBtn").click(function (e) { 
         e.preventDefault();

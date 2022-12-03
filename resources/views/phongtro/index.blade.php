@@ -60,6 +60,34 @@
   </div>
     <div class="mt-3">
         <button class="btn btn-warning" data-toggle="modal" data-target="#addPTModal">Thêm phòng</button>
+        <div class="mt-3">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Hình Ảnh</th>
+                    <th scope="col">Tên Phòng Trọ</th>
+                    <th scope="col">Diện tích</th>
+                    <th scope="col">Ngày Tạo</th>
+                    <th scope="col"></th>
+                    {{-- <th scope="col"></th> --}}
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1;?>
+                    @foreach ($allPhongTro as $item)
+                    <tr>
+                        <th scope="row"><?=$i++?></th>
+                        <td><img style="width:150px" src="http://127.0.0.1:3000/images/{{$item['image']}}" alt=""></td>
+                        <td>{{$item['dientich']}} m2</td>
+                        <td>{{$item['created_at']}}</td>
+                        <td><button class="btn-sm btnxoaRoom btn btn-danger"data-id="{{$item["idRoome"]}}"> Xóa</button></td>
+                      </tr>
+                    @endforeach
+                </tbody>
+              </table>
+        </div>
     </div>
+
 <script src="admin/phongtro.js"></script>
 @endsection
