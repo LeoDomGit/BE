@@ -79,6 +79,7 @@
                     <tr>
                         <th scope="row"><?=$i++?></th>
                         <td><img style="width:150px" src="http://127.0.0.1:3000/images/{{$item['image']}}" alt=""></td>
+                        <td>{{$item['roomname']}}</td>
                         <td>{{$item['dientich']}} m2</td>
                         <td>{{$item['created_at']}}</td>
                         <td><button class="btn-sm btnxoaRoom btn btn-danger"data-id="{{$item["idRoome"]}}"> Xóa</button></td>

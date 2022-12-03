@@ -6,6 +6,96 @@ function delete1(){
     $(".btnxoaRoom").click(function (e) { 
         e.preventDefault();
         var idRoom= $(this).attr('data-id');
+        Swal.fire({
+            title: 'Bạn muốn xóa phòng ?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Đúng',
+            denyButtonText: `Không`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:3000/api/deletePhong",
+                data: {id:idRoom},
+                dataType: "JSON",
+                success: function (response) {
+                    if(response.check==true){
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                          })
+                          
+                          Toast.fire({
+                            icon: 'success',
+                            title: 'Xóa thành công'
+                          })
+                    }else if(response.check==false){
+                        if(response.message.id){
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                              })
+                              
+                              Toast.fire({
+                                icon: 'error',
+                                title: response.message.id
+                              })
+                        }else if(response.message){
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                              })
+                              
+                              Toast.fire({
+                                icon: 'error',
+                                title: response.message
+                              })
+                        }
+                    }
+                }
+              });
+            } else if (result.isDenied) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Giữ nguyên'
+                  })
+            }
+          })
     });
 }
 function add(){
