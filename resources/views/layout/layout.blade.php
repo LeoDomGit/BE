@@ -20,16 +20,16 @@
 		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(layout/images/logo.jpg);"></a>
 	        <ul class="list-unstyled components mb-5">
 	          <li class="active">
-	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý</a>
 	            <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    <a href="#">Home 1</a>
+                    <a href="/users">Quản lý tài khoản</a>
                 </li>
                 <li>
-                    <a href="#">Home 2</a>
+                    <a href="/quan">Quản lý quận huyện</a>
                 </li>
                 <li>
-                    <a href="#">Home 3</a>
+                    <a href="/phongtro">Quản lý phòng trọ</a>
                 </li>
 	            </ul>
 	          </li>

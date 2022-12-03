@@ -101,6 +101,17 @@ function delete1(){
     });
 }
 function add(){
+    $('#file').change(function (e) { 
+      e.preventDefault();
+      var file=$(this).prop('files');
+      var filetype=file[0]['type'];
+      // console.log(filetype);
+      const validImageTypes = ['image/gif', 'image/jpeg', 'image/png','image/webp'];
+      if (validImageTypes.includes(filetype)) {
+        var str=`<img style="width:150px" src="`+URL.createObjectURL(e.target.files[0])+`" alt="">`;
+        $("#resultImage").html(str);
+      }
+    });
     $("#submitPhongTroBtn").click(function (e) { 
         e.preventDefault();
         var roomname= $("#roomname").val().trim();
@@ -109,7 +120,7 @@ function add(){
         var dientich= $("#dientich").val().trim();
         var idQuanSelect= $("#idQuanSelect option:selected").val();
         var address= $("#address").val().trim();
-        var mota= $("#mota").val().trim();
+        var mota= CKEDITOR.instances["mota"].getData().trim();
         var file= $("#file").prop('files');
         if(roomname==''){
             const Toast = Swal.mixin({

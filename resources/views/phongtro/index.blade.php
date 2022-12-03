@@ -50,6 +50,13 @@
                     <input type="file" name="file" id="file">
                 </div>
             </div>
+            <div class="row mt-3">
+                <div class="col-sm mt-3">
+                    <div id="resultImage">
+                        
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -89,6 +96,15 @@
               </table>
         </div>
     </div>
-
+<script src="admin/ckeditor/ckeditor.js"></script>
+<script src="admin/ckeditor/ckfinder.js"></script>
 <script src="admin/phongtro.js"></script>
+<script>
+    CKEDITOR.replace('mota', {
+            height: 400,
+            extraPlugins: 'easyimage',
+    cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
+    cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/'
+        });
+</script>
 @endsection

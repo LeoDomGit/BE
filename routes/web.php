@@ -18,6 +18,6 @@ use App\Http\Controllers\PhongTroController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/roles', [RoleController::class,'index']);
+Route::get('/users', [RoleController::class,'index']);
 Route::get('/quan', [PhongTroController::class,'index']);
 Route::get('/phongtro', [PhongTroController::class,'index2']);
