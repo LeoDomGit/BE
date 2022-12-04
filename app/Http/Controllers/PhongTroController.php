@@ -26,7 +26,6 @@ class PhongTroController extends Controller
     {
         $allPhongTro = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allPhong'),true);
         $allQuan= json_decode(HTTP::GET('http://127.0.0.1:3000/api/allQuan'),true);
-
          return view('phongtro.index',compact('allQuan','allPhongTro'));
     }
 

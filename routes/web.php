@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PhongTroController;
+use App\Http\Controllers\GoogleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,6 @@ use App\Http\Controllers\PhongTroController;
 Route::get('/users', [RoleController::class,'index']);
 Route::get('/quan', [PhongTroController::class,'index']);
 Route::get('/phongtro', [PhongTroController::class,'index2']);
+Route::get('/login', [RoleController::class,'login']);
+Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleController::class, 'callbackGoogle']);
