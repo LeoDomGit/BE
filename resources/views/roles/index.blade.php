@@ -1,3 +1,8 @@
+<style>
+  .taikhoanstt{
+    cursor: pointer;
+  }
+</style>
 @extends('layout.layout')
 @section('header','Quản lý loại tài khoản')
 @section('main')
@@ -52,7 +57,7 @@
                 </div>
               </div>
             </div>
-      </div>
+        </div>
       <div class="mt-2">
         <table class="table">
             <thead class="thead-dark">
@@ -60,6 +65,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên tài khoản</th>
                 <th scope="col">Email</th>
+                <th scope="col">Loại tài khoản</th>
                 <th scope="col">Tình trạng</th>
                 <th scope="col">Ngày tạo</th>
               </tr>
@@ -71,10 +77,11 @@
                     <th scope="row"><?=$i++?></th>
                     <td>{{$item['username']}}</td>
                     <td>{{$item['useremail']}}</td>
+                    <td>{{$item['rolename']}}</td>
                     <td>@if ($item['status']==1)
-                        <b>Đang hoạt động</b>
+                        <b class="taikhoanstt" data-id="{{$item['userID']}}">Đang hoạt động</b>
                     @else
-                    <b>Đang khóa</b>
+                    <b class="taikhoanstt" data-id="{{$item['userID']}}">Đang khóa</b>
                         
                     @endif</td>
                     <td>{{$item['created_at']}}</td>
