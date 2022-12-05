@@ -20,9 +20,14 @@ use App\Http\Controllers\GoogleController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/users', [RoleController::class,'index']);
-Route::get('/quan', [PhongTroController::class,'index']);
-Route::get('/phongtro', [PhongTroController::class,'index2']);
+Route::get('/', [RoleController::class,'login']);
+Route::middleware(['CheckLogin'])->group(function () {
+    Route::get('/users', [RoleController::class,'index']);
+    Route::get('/quan', [PhongTroController::class,'index']);
+    Route::get('/phongtro', [PhongTroController::class,'index2']);
+});
+
 Route::get('/login', [RoleController::class,'login']);
+Route::get('/test', [RoleController::class,'test']);
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [GoogleController::class, 'callbackGoogle']);

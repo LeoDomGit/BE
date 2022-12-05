@@ -30,6 +30,7 @@ class GoogleController extends Controller
                     'email'=>$email,
                     'image'=>$image,
                     'name'=>$name,
+                    'host'=>request()->getHttpHost(),
             ]),true);
             if($check['check']==true){
                 Session::put('name',$name);

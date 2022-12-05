@@ -13,7 +13,7 @@ class PhongTroController extends Controller
      */
     public function index()
     {
-        $allQuan= json_decode(HTTP::GET('http://127.0.0.1:3000/api/allQuan'),true);
+        $allQuan= json_decode(HTTP::GET('http://127.0.0.1:3000/api/allQuan',['host'=>request()->getHttpHost()]),true);
         return view('quan.index',compact('allQuan'));
     }
 
@@ -24,8 +24,8 @@ class PhongTroController extends Controller
      */
     public function index2()
     {
-        $allPhongTro = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allPhong'),true);
-        $allQuan= json_decode(HTTP::GET('http://127.0.0.1:3000/api/allQuan'),true);
+        $allPhongTro = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allPhong',['host'=>request()->getHttpHost()]),true);
+        $allQuan= json_decode(HTTP::GET('http://127.0.0.1:3000/api/allQuan',['host'=>request()->getHttpHost()]),true);
          return view('phongtro.index',compact('allQuan','allPhongTro'));
     }
 

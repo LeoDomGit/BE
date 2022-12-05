@@ -13,8 +13,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $LoaiTK = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allLTK'),true);
-        $allUser = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allUser'),true);
+        $LoaiTK = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allLTK',['host'=>request()->getHttpHost()]),true);
+        $allUser = json_decode(HTTP::GET('http://127.0.0.1:3000/api/allUser',['host'=>request()->getHttpHost()]),true);
         return view('roles.index',compact('LoaiTK','allUser'));
     }
 
@@ -34,9 +34,10 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function test(Request $request)
     {
-        //
+        $host = request()->getHttpHost();
+        echo $host;
     }
 
     /**

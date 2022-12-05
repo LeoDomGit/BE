@@ -1,4 +1,10 @@
+var host = window.location.host; 
 $(document).ready(function () {
+  $.ajaxSetup({
+    data: {
+        host: host,
+    },
+});
     add();
     edit();
     deleete();
