@@ -15,8 +15,9 @@ function editUser(){
   $(".edituseremail").click(function (e) { 
     var id = $(this).attr('data-id');
     e.preventDefault();
+    var email = $(this).text();
     var str =`
-    <input type="text" class="form-control mb-2" id="newEmail" placeholder="Email mới">
+    <input type="text" class="form-control mb-2" id="newEmail" value="`+email+`" placeholder="Email mới">
     `;
     $("#replaceArea").html(str);
     $("#EditModal").modal('show');
