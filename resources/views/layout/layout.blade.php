@@ -17,7 +17,13 @@
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
-		  		<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(layout/images/logo.jpg);"></a>
+          <div class="img logo rounded-circle mb-5">
+            @if (Session::has('image'))
+            <img style="width:100%;border-radius:50%" src="<?=Session::get('image')?>" alt="">                
+            @else
+            <img style="width:100%;border-radius:50%" src="layout/images/logo.jpg" alt="">
+            @endif
+          </div>
 	        <ul class="list-unstyled components mb-5">
 	          <li class="active">
 	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý</a>

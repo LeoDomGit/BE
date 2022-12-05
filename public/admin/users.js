@@ -8,8 +8,540 @@ $(document).ready(function(){
   themLoaiTK();
   themTK();
   switchUser();
+  editUser();
 });
 
+function editUser(){
+  $(".edituseremail").click(function (e) { 
+    var id = $(this).attr('data-id');
+    e.preventDefault();
+    var str =`
+    <input type="text" class="form-control mb-2" id="newEmail" placeholder="Email mới">
+    `;
+    $("#replaceArea").html(str);
+    $("#EditModal").modal('show');
+    $("#editSubmitBtn").click(function (e) { 
+      e.preventDefault();
+      var email =$("#newEmail").val().trim();
+      if(email==''){
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'error',
+          title: 'Bạn chưa nhập email'
+        })
+      }else if(!email.match(/(.+)@(gmail+)\.(com)/i)&&!email.match(/(.+)@(fpt.edu+)\.(vn)/i)){
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'error',
+          title: 'Email không hợp lệ'
+        })
+      }else{
+        var idLTK= $("#selectLTKEdit option:selected").val();
+        if(idLTK==0){
+          Swal.fire({
+            icon:'question',
+            text: 'Bạn muốn thay đổi thông tin tài khoản',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Đúng',
+            denyButtonText: `Không`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:3000/api/editUser",
+                data: {
+                  id:id,
+                  email:email,
+                },
+                dataType: "JSON",
+                success: function (response) {
+                  if(response.check==true){
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
+                    
+                    Toast.fire({
+                      icon: 'success',
+                      title: 'Thay đổi thành công'
+                    }).then(()=>{
+                      window.location.reload()
+                    })
+                  }else if(response.check==false){
+                    if(response.message.id){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message.id
+                      })
+                    }else if(response.message.email){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message.email
+                      })
+                    }else if(response.message){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message
+                      })
+                    }
+                  }
+                }
+              });
+            } else if (result.isDenied) {
+              $("#EditModal").modal('hide');
+            }
+          })
+        }else{
+          Swal.fire({
+            icon:'question',
+            text: 'Bạn muốn thay đổi thông tin tài khoản',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Đúng',
+            denyButtonText: `Không`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:3000/api/editUser",
+                data: {
+                  id:id,
+                  email:email,
+                  idLTK:idLTK,
+                },
+                dataType: "JSON",
+                success: function (response) {
+                  if(response.check==true){
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
+                    
+                    Toast.fire({
+                      icon: 'success',
+                      title: 'Thay đổi thành công'
+                    }).then(()=>{
+                      window.location.reload()
+                    })
+                  }else if(response.check==false){
+                    if(response.message.id){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message.id
+                      })
+                    }else if(response.message.email){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message.email
+                      })
+                    }else if(response.message.idLTK){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message.idLTK
+                      })
+                    }else if(response.message){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'error',
+                        title: response.message
+                      })
+                    }
+                  }
+                }
+              });
+            } else if (result.isDenied) {
+              $("#EditModal").modal('hide');
+
+            }
+          })
+        }
+      }
+    });
+    $('#newEmail').keyup(function (e) { 
+      var email =$("#newEmail").val().trim();
+      if(e.which===13){
+        if(email==''){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'error',
+            title: 'Bạn chưa nhập email'
+          })
+        }else if(!email.match(/(.+)@(gmail+)\.(com)/i)&&!email.match(/(.+)@(fpt.edu+)\.(vn)/i)){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'error',
+            title: 'Email không hợp lệ'
+          })
+        }else{
+          var idLTK= $("#selectLTKEdit option:selected").val();
+          if(idLTK==0){
+            Swal.fire({
+              icon:'question',
+              text: 'Bạn muốn thay đổi thông tin tài khoản',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Đúng',
+              denyButtonText: `Không`,
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                $.ajax({
+                  type: "post",
+                  url: "http://127.0.0.1:3000/api/editUser",
+                  data: {
+                    id:id,
+                    email:email,
+                  },
+                  dataType: "JSON",
+                  success: function (response) {
+                    if(response.check==true){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'success',
+                        title: 'Thay đổi thành công'
+                      }).then(()=>{
+                        window.location.reload()
+                      })
+                    }else if(response.check==false){
+                      if(response.message.id){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message.id
+                        })
+                      }else if(response.message.email){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message.email
+                        })
+                      }else if(response.message){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message
+                        })
+                      }
+                    }
+                  }
+                });
+              } else if (result.isDenied) {
+                $("#EditModal").modal('hide');
+              }
+            })
+          }else{
+            Swal.fire({
+              icon:'question',
+              text: 'Bạn muốn thay đổi thông tin tài khoản',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Đúng',
+              denyButtonText: `Không`,
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                $.ajax({
+                  type: "post",
+                  url: "http://127.0.0.1:3000/api/editUser",
+                  data: {
+                    id:id,
+                    email:email,
+                    idLTK:idLTK,
+                  },
+                  dataType: "JSON",
+                  success: function (response) {
+                    if(response.check==true){
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                      })
+                      
+                      Toast.fire({
+                        icon: 'success',
+                        title: 'Thay đổi thành công'
+                      }).then(()=>{
+                        window.location.reload()
+                      })
+                    }else if(response.check==false){
+                      if(response.message.id){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message.id
+                        })
+                      }else if(response.message.email){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message.email
+                        })
+                      }else if(response.message.idLTK){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message.idLTK
+                        })
+                      }else if(response.message){
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        })
+                        
+                        Toast.fire({
+                          icon: 'error',
+                          title: response.message
+                        })
+                      }
+                    }
+                  }
+                });
+              } else if (result.isDenied) {
+                $("#EditModal").modal('hide');
+
+              }
+            })
+          }
+        }
+      }
+    });
+  });
+}
+// =====================================
 function themTK(){
       $("#addUserSubmit").click(function (e) { 
         e.preventDefault();

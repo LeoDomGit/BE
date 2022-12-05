@@ -2,6 +2,9 @@
   .taikhoanstt{
     cursor: pointer;
   }
+  .edituseremail{
+    cursor: pointer;
+  }
 </style>
 @extends('layout.layout')
 @section('header','Quản lý loại tài khoản')
@@ -58,6 +61,38 @@
               </div>
             </div>
         </div>
+        {{-- -=========================================== --}}
+
+        <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thay đổi thông tin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div id="replaceArea">
+                  
+                </div>
+                <select name="" class="form-control mt-2" id="selectLTKEdit">
+                  <option value="0">Chọn loại tài khoản</option>
+                  @foreach ($LoaiTK as $item)
+                      <option value="{{$item['id']}}">{{$item['name']}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editSubmitBtn">Lưu</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{-- ================================================ --}}
+
       <div class="mt-2">
         <table class="table">
             <thead class="thead-dark">
@@ -75,8 +110,8 @@
                 @foreach ($allUser as $item)
                 <tr>
                     <th scope="row"><?=$i++?></th>
-                    <td>{{$item['username']}}</td>
-                    <td>{{$item['useremail']}}</td>
+                    <td><b>{{$item['username']}}</b></td>
+                    <td><b class="edituseremail" data-id="{{$item['userID']}}">{{$item['useremail']}}</b></td>
                     <td>{{$item['rolename']}}</td>
                     <td>@if ($item['status']==1)
                         <b class="taikhoanstt" data-id="{{$item['userID']}}">Đang hoạt động</b>
