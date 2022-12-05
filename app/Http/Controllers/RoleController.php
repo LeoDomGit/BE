@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+
 class RoleController extends Controller
 {
     /**
@@ -46,9 +48,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function logout()
     {
-        //
+        if(Session::has('name')&&Session::has('image')){
+            Session::remove('name');
+            Session::remove('image');
+            return redirect('/');
+        }else{
+            return redirect('/');
+        }
     }
 
     /**

@@ -25,6 +25,7 @@ Route::middleware(['CheckLogin'])->group(function () {
     Route::get('/users', [RoleController::class,'index']);
     Route::get('/quan', [PhongTroController::class,'index']);
     Route::get('/phongtro', [PhongTroController::class,'index2']);
+    Route::get('/logout', [RoleController::class,'logout']);
 });
 
 Route::get('/login', [RoleController::class,'login']);
