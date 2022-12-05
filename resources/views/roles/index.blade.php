@@ -85,6 +85,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-danger " id="deleteBtn">Xóa</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn">Lưu</button>
               </div>
             </div>
